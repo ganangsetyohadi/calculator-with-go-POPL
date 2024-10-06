@@ -1,7 +1,5 @@
-# This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-
-name: Go
+# This workflow will build a golang project and build a Docker image
+name: Go with Docker
 
 on:
   push:
@@ -10,9 +8,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
 
@@ -21,8 +19,26 @@ jobs:
       with:
         go-version: '1.23.2'
 
-    - name: Build
+    - name: Build Go project
       run: go build -v ./...
 
-    - name: Test
+    - name: Test Go project
       run: go test -v ./...
+
+    # Step to set up Docker in the GitHub Actions environment
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: Dockerfile
+        push: true
+        tags: ganangsetyohadi/web-calculator-go-praktikum5-popl:latest
