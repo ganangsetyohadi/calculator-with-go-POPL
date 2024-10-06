@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Simple Web Calculator</h1>
+        
+        <form id="calculator-form" action="/" method="post" onsubmit="return validateForm()">
+            <input type="text" id="num1" name="num1" placeholder="First Number" value="{{.Num1}}" required>
+            <input type="text" id="num2" name="num2" placeholder="Second Number" value="{{.Num2}}" required>
+
+            <select name="operation" id="operation" required>
+                <option value="" disabled selected>Select Operation</option>
+                <option value="add" {{if eq .Operation "add"}}selected{{end}}>+</option>
+                <option value="subtract" {{if eq .Operation "subtract"}}selected{{end}}>-</option>
+                <option value="multiply" {{if eq .Operation "multiply"}}selected{{end}}>*</option>
+                <option value="divide" {{if eq .Operation "divide"}}selected{{end}}>/</option>
+            </select>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {{if .Result}}
+        <div class="result">
+            Result: <span id="result">{{.Result}}</span>
+        </div>
+        {{end}}
+
+        {{if .ErrMsg}}
+        <div class="error">{{.ErrMsg}}</div>
+        {{end}}
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
