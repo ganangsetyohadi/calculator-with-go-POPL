@@ -1,21 +1,29 @@
-// Function to validate the form before submission
-function validateForm() {
-    const num1 = document.getElementById("num1").value;
-    const num2 = document.getElementById("num2").value;
-    const operation = document.getElementById("operation").value;
+document.getElementById('calcForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-    if (!num1 || isNaN(num1)) {
-        alert("Please enter a valid number for the first input.");
-        return false;
-    }
-    if (!num2 || isNaN(num2)) {
-        alert("Please enter a valid number for the second input.");
-        return false;
-    }
-    if (!operation) {
-        alert("Please select an operation.");
-        return false;
-    }
+    const form = e.target;
+    const formData = new FormData(form);
 
-    return true;
+    fetch('/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const result = doc.getElementById('result').textContent;
+        document.getElementById('result').textContent = result;
+    });
+});
+
+function toggleSecondInput() {
+    const operator = document.getElementById("operator").value;
+    const secondNumberGroup = document.getElementById("secondNumberGroup");
+
+    if (operator === "sqrt") {
+        secondNumberGroup.style.display = "none";
+    } else {
+        secondNumberGroup.style.display = "block";
+    }
 }

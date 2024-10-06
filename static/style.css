@@ -1,53 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f9f9f9;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
-.calculator-container {
+.container {
     background-color: #fff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 350px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 100%;
+    max-width: 400px;
 }
 
 h1 {
-    color: #333;
+    color: #343a40;
     margin-bottom: 20px;
     font-size: 24px;
 }
 
-input, select, button {
-    width: 100%;
-    max-width: 250px;  /* Atur lebar maksimum agar seragam */
-    padding: 10px;     /* Kurangi padding agar terlihat lebih proporsional */
-    margin-bottom: 15px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    transition: all 0.3s ease;
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-input:focus, select:focus {
-    border-color: #66b3ff;
+.input-group {
+    margin-bottom: 20px;
+}
+
+input, select {
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 100%;
 }
 
 button {
-    width: 100%;
-    max-width: 250px;   /* Samakan lebar tombol dengan input dan select */
     background-color: #28a745;
     color: white;
+    padding: 15px;
+    font-size: 18px;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
-    padding: 12px;      /* Sesuaikan padding tombol */
     transition: background-color 0.3s ease;
 }
 
@@ -55,14 +61,7 @@ button:hover {
     background-color: #218838;
 }
 
-.result {
+h2 {
     margin-top: 20px;
-    font-size: 20px;
-    color: #333;
-    font-weight: bold;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
+    color: #495057;
 }
