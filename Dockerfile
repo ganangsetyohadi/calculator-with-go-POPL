@@ -4,13 +4,14 @@ FROM golang:1.20-alpine AS build
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy go.mod (without go.sum, since your project doesn't have it)
+# Copy the Go modules file (go.mod) to the container
 COPY go.mod ./
 
-# Download dependencies (if any, otherwise this won't do much)
-RUN go mod download
+# Since there are no dependencies, skip go mod download
+# Uncomment the following line if you use dependencies
+# RUN go mod download
 
-# Copy the source code
+# Copy the source code to the container
 COPY . .
 
 # Build the Go app
